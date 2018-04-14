@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+{{> /include/head  }}
+<body>
+	{{ ^me }}
+		<a href="/user/login">로그인</a>
+	{{ /me }}
+	{{ #me }}
+		<h3>{{name}}님 안녕하세요</h3>
+		<a href="/user/logout">로그아웃</a>
+	{{ /me }}
+
+	<h1>리스트</h1>
+	{{ #users }}
+		<li>
+			<a href="/user/{{no}}">
+				{{ id }} | {{ name }}	
+			</a>
+		</li>
+	{{ /users }}
+	
+	<div id="pagination"></div>	
+	
+{{> /include/script  }}
+</body>
+</html>
+
+
+<script>
+	/* console.log($("body").html());
+	var totalPage = parseInt("{{  totalPage }}");
+	
+	var html = "";
+	for(var i = 0; i < totalPage; i++) {
+		html +="<a href=?pageNo="+i+">"+(i+1)+"</a>";
+	}
+	$("#pagenation").html(html); */
+	
+	 $(document).ready(function(){
+
+	        var firstPageBlock = parseInt("{{firstPageBlock}}");
+	        var lastPageBlock = parseInt("{{lastPageBlock}}");
+	        var totalPage = parseInt("{{totalPage}}");
+
+	        var nowPage = parseInt("{{nowPage}}");
+
+	        console.log(firstPageBlock, lastPageBlock)
+
+	        var html = "";
+	        var active = ""
+	        for (var i = firstPageBlock; i <= lastPageBlock; i++){
+	            if(i==firstPageBlock && firstPageBlock!=0){
+	                html += "<span>" +
+	                    "      <a href='?pageNo=0' aria-label='Previous'>" +
+	                    "        <span aria-hidden='true'><<</span>" +
+	                    "      </a>" +
+	                    "    </span>"
+	                html += "<span>" +
+	                    "      <a href='?pageNo="+(nowPage-1)+"' aria-label='Previous'>" +
+	                    "        <span aria-hidden='true'><</span>" +
+	                    "      </a>" +
+	                    "    </span>"
+
+	            }
+
+	            active = nowPage == i ? "active" : "";
+	            html += "<span class='"+active+"'><a href='?pageNo="+i+"'>"+(i+1)+"</a></span>"
+
+	            if(i== lastPageBlock && lastPageBlock+1!=totalPage){
+	                html += "<span>" +
+	                    "      <a href='?pageNo="+(nowPage+1)+"' aria-label='Next'>" +
+	                    "        <span aria-hidden='true'>></span>" +
+	                    "      </a>" +
+	                    "    </span>"
+	                html += "<span>" +
+	                    "      <a href='?pageNo="+(totalPage-1)+"' aria-label='Next'>" +
+	                    "        <span aria-hidden='true'>>></span>" +
+	                    "      </a>" +
+	                    "    </span>"
+	            }
+	        }
+
+	        $("#pagination").html(html);
+
+	    });
+	
+</script>
+
+<style>
+	#pagination a {
+	font-size : 25px;
+	padding : 10px;
+	font-weight:bold;
+	}
+</style>

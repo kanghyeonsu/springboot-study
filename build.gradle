@@ -1,0 +1,71 @@
+buildscript {
+   ext {
+      springBootVersion = '1.5.10.RELEASE'
+   }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+   }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.wgbt'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+   mavenCentral()
+}
+
+
+dependencies {
+   compile('org.springframework.boot:spring-boot-starter-data-jpa')
+   compile('org.springframework.boot:spring-boot-starter-web')
+   compile('org.springframework.boot:spring-boot-starter-mustache')
+   runtime('org.springframework.boot:spring-boot-devtools')
+
+   // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+   compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
+   runtime('com.h2database:h2')   // java 기반의 아주 가벼운 라이브러리
+
+   compileOnly('org.projectlombok:lombok')
+   
+   testCompile('org.springframework.boot:spring-boot-starter-test')
+
+   // https://mvnrepository.com/artifact/org.webjars/bootstrap
+   compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7-1'
+   // https://mvnrepository.com/artifact/org.webjars/jquery
+   compile group: 'org.webjars', name: 'jquery', version: '3.2.1'
+
+//   // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+//   compile group: 'org.hibernate', name: 'hibernate-core', version: '4.1.4.Final'
+//
+//   // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
+//   compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.3.Final'
+
+
+   // Ajax json사용시 필요한 Jackson 라이브러리 사용하기 위해 다운
+   // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+   compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+   // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+   compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+   // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+   compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.4'
+   // https://mvnrepository.com/artifact/com.google.code.gson/gson
+   compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+
+
+	// https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
+compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
+
+   compile 'io.springfox:springfox-swagger2:2.6.1'
+   compile 'io.springfox:springfox-swagger-ui:2.6.1'
+
+}

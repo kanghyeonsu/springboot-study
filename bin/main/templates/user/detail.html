@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>디테일</h1>
+	{{ #user }}
+	<form action="/user/{{no}}" method="post">
+		<p>
+			아이디 : <input type="text" name="id" value="{{ id }}">
+		</p> 	
+		<p>
+			패스워드 : <input type="text" name="pw" value="{{ pw }}">
+		</p> 	
+		<p>
+			이름 : <input type="text" name="name" value="{{ name }}">
+		</p>
+		<p>
+			<button type="submit">회원정보 수정</button>
+		</p>
+	</form>
+	<p>
+		<a href="/user/delete/{{no}}">삭제</a>
+	</p>
+	{{ /user }}
+</body>
+</html>
